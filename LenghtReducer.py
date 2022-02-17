@@ -28,5 +28,5 @@ for line in sys.stdin:
     
 
 if lastKey:
-    total = str(a)/str(s)
+    total = a/s
     print(lastKey + TAB_CHAR + 'Average Lenght:' + str(total))
