@@ -10,5 +10,5 @@ m_name = FOREACH movies GENERATE SUBSTRING(movie_name, 1, (int)SIZE(movie_name))
 joined = JOIN avg_ratings BY movie_id, movies BY movie_id;
 dataset = FOREACH joined GENERATE movies::movie_name as movie_name, avg_ratings::avg_rating as avg_rating;
 ordered = ORDER dataset BY m_name desc;
-top10 = LIMIT ordered 10;
+top10 = LIMIT ordered 10000;
 DUMP top10;
