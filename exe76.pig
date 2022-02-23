@@ -11,5 +11,5 @@ m_name = FOREACH group_movies GENERATE group as movie_id,  SIZE(movies.movie_nam
 joined = JOIN m_name BY movie_id, movies BY movie_id;
 dataset = FOREACH joined GENERATE movies::movie_name as movie_name, m_name::m_name as m_name;
 ordered = ORDER dataset BY m_name desc;
-top10 = LIMIT ordered 10;
+top10 = LIMIT ordered 100;
 DUMP top10;
