@@ -8,8 +8,8 @@ movies = LOAD '/root/input/u.item' USING PigStorage('|') AS (movie_id:int, movie
 group_movies = GROUP  movies BY movie_id;
 m_name = FOREACH movies GENERATE group as movie_id,  SIZE(movies.movie_name) as name;
 
-joined = JOIN avg_ratings BY movie_id, movies BY movie_id;
-dataset = FOREACH joined GENERATE movies::movie_name as movie_name, avg_ratings::avg_rating as avg_rating, m_name::m_name as m_name;
+joined = JOIN m_name BY movie_id, movies BY movie_id;
+dataset = FOREACH joined GENERATE movies::movie_name as movie_name, m_name::m_name as m_name;
 ordered = ORDER dataset BY m_name desc;
 top10 = LIMIT ordered 10;
 DUMP top10;
