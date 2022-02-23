@@ -8,7 +8,7 @@ movies = LOAD '/root/input/u.item' USING PigStorage('|') AS (movie_id:int, movie
 leg = FOREACH movies GENERATE SIZE(movie_name);
 
 ordered = ORDER movies BY leg desc;
-top10 = LIMIT leg 10;
+top10 = LIMIT ordered 10;
 DUMP top10;
 
 
