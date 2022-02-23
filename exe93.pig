@@ -5,8 +5,8 @@ avg_ratings = FILTER avg_ratings BY count_rating >= 10;
 
 movies = LOAD '/root/input/u.item' USING PigStorage('|') AS (movie_id:int, movie_name:chararray);
 
-group_movies = GROUP  movie_name BY movie_id;
-m_name = FOREACH movies GENERATE SUBSTRING(movie_name, 1, (int)SIZE(movie_name)) as name;
+group_movies = GROUP  movies BY movie_id;
+m_name = FOREACH movies GENERATE SIZE(movie_name) as name;
 
 joined = JOIN avg_ratings BY movie_id, movies BY movie_id;
 dataset = FOREACH joined GENERATE movies::movie_name as movie_name, avg_ratings::avg_rating as avg_rating, m_name::m_name as m_name;
