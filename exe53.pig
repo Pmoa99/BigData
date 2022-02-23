@@ -4,7 +4,7 @@ avg_ratings = FOREACH group_ratings GENERATE group as movie_id, AVG(ratings.rati
 avg_ratings = FILTER avg_ratings BY count_rating >= 10;
 
 movies = LOAD '/root/input/u.item' USING PigStorage('|') AS (movie_id:int, movie_name:chararray);
-size = FOREACH movies GENERATE SIZE(movie_name)
+size = FOREACH movies GENERATE SIZE(movie_name);
 ordered = ORDER movies BY size desc;
 
 DUMP order;
